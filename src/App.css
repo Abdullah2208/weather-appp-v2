@@ -1,7 +1,4 @@
-@font-face {
-    font-family: Nunito;
-    src: url(../public/Nunito-font/Nunito-Black.ttf) ;
-}
+
 body {
     background-color: #F5F5F5;
     overflow-x: hidden;

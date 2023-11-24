@@ -2,6 +2,7 @@ import './App.css';
 import Header from './Components/Header';
 import { useEffect, useState } from 'react';
 import Location from './Components/Headline';
+import MainBox from './Components/MainBox';
 
 function App() {
 
@@ -10,7 +11,6 @@ function App() {
 
   const [location, setlocation] = useState(null);
   const [weather, setWeather] = useState(null);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +28,6 @@ function App() {
         const responce = await fetch(`https://ipinfo.io?token=${token}`);
         let data = await responce.json();
         setlocation(data);
-        console.log(data)
         return data.city;
       } catch (error) {
         console.log("Erorr while fetching location: ", error)
@@ -39,7 +38,6 @@ function App() {
         const responce = await fetch(`https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${apiKey}&q=${location}`);
         const json = await responce.json();
         const data = json[0].Key;
-        console.log(data)
         return data;
       } catch (error) {
       console.log("Error while fetching location key: ", error)
@@ -51,7 +49,6 @@ function App() {
         const json = await responce.json();
         const data = json[0];
         setWeather(data);
-        console.log(data)
         return data;
       } catch (error) {
         console.log("Error while fetching data: ", error)
@@ -61,13 +58,13 @@ function App() {
   }, [])
 
 
-
   return (
     <div>
-
       <Header />
       {location && weather && <Location city={location.city}  country={location.country} weather={weather.WeatherText}/>}
-  
+      
+      {weather && <MainBox weather={weather} />}
+      
       {weather && (
         <>
           <div>{Math.round(weather.Temperature.Metric.Value)}</div>

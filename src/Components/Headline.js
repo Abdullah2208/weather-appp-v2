@@ -11,7 +11,7 @@ function Location(props) {
             <span className='location-black'>
                 <Typewriter 
                     words={[` ${city}, ${country}`]}
-                    loop={99}
+                    loop={999}
                     cursor
                     cursorStyle="|"
                     delaySpeed={3000}
