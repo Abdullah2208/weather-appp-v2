@@ -11,12 +11,15 @@ function App() {
 
   const [location, setlocation] = useState(null);
   const [weather, setWeather] = useState(null);
+  const [additionalData, setAdditionalData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const location = await fetchGeoLocation();
-        const locationKey = await fetchLocationKey(location);
+        const locationKey = await fetchLocationKey(location.city);
+        const coordinates = await location.loc.split(",")
+        await additional(coordinates[0], coordinates[1])
         await fetchCurrentWeather(locationKey);
       } catch (error) {
         console.error("Error during data fetching:", error);
@@ -28,7 +31,7 @@ function App() {
         const responce = await fetch(`https://ipinfo.io?token=${token}`);
         let data = await responce.json();
         setlocation(data);
-        return data.city;
+        return data;
       } catch (error) {
         console.log("Erorr while fetching location: ", error)
       }
@@ -54,23 +57,26 @@ function App() {
         console.log("Error while fetching data: ", error)
       }
     }
+    const additional = async (lat, lon) => {
+      try {
+        const responce = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,is_day,precipitation,rain,showers,snowfall,wind_speed_10m`);
+        const json = await responce.json();
+        const data = json.current;
+        setAdditionalData(data)
+      } catch(error) {
+        console.log("Error while fetching: ", error)
+      }
+    } 
     fetchData();
   }, [])
-
 
   return (
     <div>
       <Header />
       {location && weather && <Location city={location.city}  country={location.country} weather={weather.WeatherText}/>}
       
-      {weather && <MainBox weather={weather} />}
-      
-      {weather && (
-        <>
-          <div>{Math.round(weather.Temperature.Metric.Value)}</div>
-          <div>{weather.IsDayTime ? <p>Day</p> : <p>Night</p>}</div>
-        </>
-      )}
+      {additionalData && weather && <MainBox weather={weather} additional={additionalData}/>}
+
     </div>
   );
   

@@ -21,7 +21,66 @@ header nav ul{
     display: none;
 }
 header nav ul li:hover {
-    border-bottom: 2px solid #333333;
+    text-decoration: underline dotted;
+}
+
+.main-logo{
+    width: 100px;
+}
+.location {
+    margin-top: 3em;
+    font-size: 1.5em;
+    text-align: center;
+}
+.location-gray {
+    color: #808080
+}
+.location-black {
+    text-decoration: underline dotted;
+}
+
+.main-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 'icon temperature additional';
+    justify-items: center;
+    gap: 0;
+    margin-top: 3em;
+}
+.icon, .temperature, .additional-info-box, .icon p, .temperature p, .additional-info-box div{
+    margin: 0;
+    text-align: center;
+    width: fit-content;
+    padding: 0;
+    border: 0;
+}
+
+.icon {
+    grid-area: icon;
+}
+.temperature  {
+    font-size: 150px;
+    grid-area: temperature;
+}
+
+.additional-info-box {
+    grid-area: additional;
+    font-size: 1.4em;
+}
+.additional-info-box div img, .additional-info-box div p{
+    display: inline;
+}
+.additional-info-box div img{
+    padding-right: 2rem;
+}
+.degree-buttons {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+.degree-buttons div{
+    display: inline;
 }
 @media (max-width: 600px) {
     header nav ul{
@@ -47,18 +106,12 @@ header nav ul li:hover {
     .true {
         transform: translateX(0%);
     }
-}
-.main-logo{
-    width: 100px;
-}
-.location {
-    margin-top: 3em;
-    font-size: 1.5em;
-    text-align: center;
-}
-.location-gray {
-    color: #808080
-}
-.location-black {
-    text-decoration: underline dotted;
+
+    .main-box {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+        "icon" 
+        "temperature"
+        "additional";
+    }
 }
