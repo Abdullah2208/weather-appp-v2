@@ -51,8 +51,12 @@ header nav ul li:hover {
     margin: 0;
     text-align: center;
     width: fit-content;
-    padding: 0;
+    padding-bottom: 15px;
     border: 0;
+}
+.additional-info-box div{
+    display: flex;
+    align-items: center;
 }
 
 .icon {
@@ -69,6 +73,7 @@ header nav ul li:hover {
 }
 .additional-info-box div img, .additional-info-box div p{
     display: inline;
+    margin: 0;
 }
 .additional-info-box div img{
     padding-right: 2rem;
@@ -82,7 +87,36 @@ header nav ul li:hover {
 .degree-buttons div{
     display: inline;
 }
+
+.aqi-box {
+    margin: 3rem 6rem 5rem 6rem;
+    border-radius: 5px ;
+
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    padding: 3rem;
+}
+
+.aqi-value {
+    background-color: hsla(0, 0%, 0%, 0.2);
+    display: flex;
+    padding: 0 1.5rem 0 1.5rem;
+    flex-direction: column;
+    color: white;
+    border-radius: 5px;
+    width: 90px;
+    height: 90px;
+    font-size: 0.8rem;
+}
+.aqi-value p:nth-child(2) {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
 @media (max-width: 600px) {
+    body {
+        display: block;
+    }
     header nav ul{
         margin: 0;
         padding-top: 50%;

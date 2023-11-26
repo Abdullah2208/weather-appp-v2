@@ -3,24 +3,27 @@ import Header from './Components/Header';
 import { useEffect, useState } from 'react';
 import Location from './Components/Headline';
 import MainBox from './Components/MainBox';
+import AQI from './Components/AQI'
 
 function App() {
 
   const token = '544cc40b9018a5';
-  const apiKey = 'SiPVszgovu6aFy5pYecgwyi8szDKfZM3';
+  const apiKey = 'BYCNEsy1rr1ZOxjypa62SCgl7O3edurs';
 
   const [location, setlocation] = useState(null);
   const [weather, setWeather] = useState(null);
   const [additionalData, setAdditionalData] = useState(null);
+  const [aqi, setAqi] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const location = await fetchGeoLocation();
         const locationKey = await fetchLocationKey(location.city);
-        const coordinates = await location.loc.split(",")
-        await additional(coordinates[0], coordinates[1])
+        const coordinates = await location.loc.split(",");
         await fetchCurrentWeather(locationKey);
+        await additional(coordinates[0], coordinates[1]);
+        await fetchAQI(location.city)
       } catch (error) {
         console.error("Error during data fetching:", error);
       }
@@ -64,11 +67,22 @@ function App() {
         const data = json.current;
         setAdditionalData(data)
       } catch(error) {
-        console.log("Error while fetching: ", error)
+        console.log("Error while fetching additional: ", error)
       }
     } 
+    const fetchAQI = async (city) => {
+      try{
+        const responce = await fetch(`https://api.waqi.info/feed/${city}/?token=10fa5c0c0603216085c6ad4d8349cbd6eb0436f8`)
+        const json = await responce.json();
+        const data = await json.data;
+        setAqi(data)
+      } catch (error) {
+        console.log("error while fetching AQI: ", error)
+      }
+    }
     fetchData();
   }, [])
+
 
   return (
     <div>
@@ -77,6 +91,7 @@ function App() {
       
       {additionalData && weather && <MainBox weather={weather} additional={additionalData}/>}
 
+      {aqi && <AQI aqi={aqi.aqi} city={location.city}/>}
     </div>
   );
   
