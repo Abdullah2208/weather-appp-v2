@@ -1,4 +1,6 @@
 import "../App.css";
+import Forecast from "./Forecast";
+
 import { useState, useEffect} from 'react';
 import SunnyIcon from './Icons/SunnyIcon.svg'
 import NightClear from './Icons/ClearNight.png'
@@ -25,7 +27,7 @@ function MainBox (props) {
 
     const degreeSymbol = '\u00B0';
 
-    const {weather, additional} = props;
+    const {weather, additional, forecast} = props;
 
     const condition = weather.WeatherText;
 
@@ -116,6 +118,8 @@ else
 }, [condition, isDay])
 
     
+let impericalWind = wind /1.852;
+impericalWind = impericalWind.toFixed(1)
 
     return (
         <main>
@@ -125,9 +129,10 @@ else
                 <div className="additional-info-box">
                     <div className="humidity"><img src={HumiditySensor} alt="A humidity sensor" width={'30px'}/><p>{humidity}%</p></div>
                     <div className="precipitation"><img src={Umbrella} alt="An umbrella" width={'30px'}/><p>{precipitation}%</p></div>
-                    <div className="wind"><img src={WindSock} alt="A wind sock"  width={'30px'}/><p>{wind}km/h</p></div>
+                    <div className="wind"><img src={WindSock} alt="A wind sock"  width={'30px'}/>{isFarenheit? <p>{impericalWind} knots</p>: <p>{wind}km/h</p>}</div>
                 </div>
             </div>
+            <Forecast forecast={forecast} isFarenheit={isFarenheit}/>
             <div className="degree-buttons"><div role="button" onClick={() => setIsFarenheit(false)}>{degreeSymbol}C </div><div>|</div><div role="button" onClick={() => setIsFarenheit(true)}> {degreeSymbol}F</div></div>
         </main>
     )

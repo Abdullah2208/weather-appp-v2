@@ -3,7 +3,9 @@ body {
     background-color: #F5F5F5;
     overflow-x: hidden;
 }
-
+img {
+    pointer-events: none;
+}
 header {
     padding: 1em 6% 0 1em;
     border-bottom: 3px solid #333333;
@@ -70,6 +72,7 @@ header nav ul li:hover {
 .additional-info-box {
     grid-area: additional;
     font-size: 1.4em;
+    padding-top: 10px;
 }
 .additional-info-box div img, .additional-info-box div p{
     display: inline;
@@ -89,16 +92,15 @@ header nav ul li:hover {
 }
 
 .aqi-box {
-    margin: 3rem 6rem 5rem 6rem;
+    margin: 3rem 6rem 0rem 6rem;
     border-radius: 5px ;
-
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
-    padding: 3rem;
+    padding: 0rem;
 }
 
 .aqi-value {
-    background-color: hsla(0, 0%, 0%, 0.2);
+    background-color: hsla(0, 0%, 0%, 0.1);
     display: flex;
     padding: 0 1.5rem 0 1.5rem;
     flex-direction: column;
@@ -107,15 +109,74 @@ header nav ul li:hover {
     width: 90px;
     height: 90px;
     font-size: 0.8rem;
+    margin: 3rem
+}
+.aqi-condition {
+    margin: 1.5rem 0 0 3rem
+}
+.aqi-icon {
+    width: 8rem;
+    display: flex;
 }
 .aqi-value p:nth-child(2) {
     font-size: 1.8rem;
     margin: 0;
 }
-
+.aqi-condition p:nth-child(2) {
+    font-size: 2rem;
+}
+.aqi-icon img {
+    width: 100%;
+    align-items: center;
+}
+.indices-main-box {
+    margin: 4rem 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    border-radius: 5px;
+    padding: 2rem 0;
+    box-shadow: 0 0 10px -5px;
+}
+.indices-div img {
+    width: 30px;
+    display: block;
+    margin: auto 0;
+}
+.indices-div  {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: auto;
+    width: fit-content;
+    min-width: 300px;
+    border-bottom: 1px dotted currentColor;
+}
+.indices-div > * {
+    width: fit-content;
+}
+.indices-div p:nth-child(3) {
+    padding: 5px 10px;
+    border-radius: 25px;
+}
+.indice-green {
+    background-color: #9cd84e;
+    color: #607631;
+}
+.indice-red {
+    background-color: #f65e5f;
+    color: #942431;
+}
+.indice-yellow {
+    background-color: #facf39;
+    color: #8c6c1d;
+}
+.indice-purple {
+    background-color: #a070b6;
+    color: #543b63;
+}
 @media (max-width: 600px) {
     body {
-        display: block;
+        display: none;
     }
     header nav ul{
         margin: 0;

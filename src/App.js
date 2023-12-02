@@ -3,17 +3,20 @@ import Header from './Components/Header';
 import { useEffect, useState } from 'react';
 import Location from './Components/Headline';
 import MainBox from './Components/MainBox';
-import AQI from './Components/AQI'
+import AQI from './Components/AQI';
+import Indices from './Components/Indices';
 
 function App() {
 
   const token = '544cc40b9018a5';
-  const apiKey = 'BYCNEsy1rr1ZOxjypa62SCgl7O3edurs';
+  const apiKey = 'v90KQ6JEhK6OuigQwKHpKGeKf63tv4m9';
 
   const [location, setlocation] = useState(null);
   const [weather, setWeather] = useState(null);
   const [additionalData, setAdditionalData] = useState(null);
+  const [forecast, setForecat ] = useState(null);
   const [aqi, setAqi] = useState(null);
+  const [indices, setIndices] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,7 +26,9 @@ function App() {
         const coordinates = await location.loc.split(",");
         await fetchCurrentWeather(locationKey);
         await additional(coordinates[0], coordinates[1]);
-        await fetchAQI(location.city)
+        await fetchForecast(locationKey)
+        await fetchAQI(location.city);
+        await fetchIndices(locationKey);
       } catch (error) {
         console.error("Error during data fetching:", error);
       }
@@ -55,7 +60,6 @@ function App() {
         const json = await responce.json();
         const data = json[0];
         setWeather(data);
-        return data;
       } catch (error) {
         console.log("Error while fetching data: ", error)
       }
@@ -70,6 +74,16 @@ function App() {
         console.log("Error while fetching additional: ", error)
       }
     } 
+    const fetchForecast = async (locationKey) => {
+      try{
+        const responce = await fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${apiKey}`);
+        const json = await responce.json();
+        const data = await json.DailyForecasts;
+        setForecat(data)
+      }catch(error) {
+        console.log('Error while fetching Forecast', error)
+      }
+    }
     const fetchAQI = async (city) => {
       try{
         const responce = await fetch(`https://api.waqi.info/feed/${city}/?token=10fa5c0c0603216085c6ad4d8349cbd6eb0436f8`)
@@ -80,18 +94,30 @@ function App() {
         console.log("error while fetching AQI: ", error)
       }
     }
+    const fetchIndices = async (locationKey) => {
+      try {
+        const responce = await fetch(`http://dataservice.accuweather.com/indices/v1/daily/1day/${locationKey}?apikey=${apiKey}`);
+        const json = await responce.json();
+        setIndices(json)
+      }catch(error) {
+        console.log("error while fetching indices: ", error)
+      }  
+    }
     fetchData();
-  }, [])
 
+  }, [])
 
   return (
     <div>
       <Header />
       {location && weather && <Location city={location.city}  country={location.country} weather={weather.WeatherText}/>}
       
-      {additionalData && weather && <MainBox weather={weather} additional={additionalData}/>}
+      {additionalData && weather && forecast && <MainBox weather={weather} additional={additionalData} forecast={forecast} />}
 
       {aqi && <AQI aqi={aqi.aqi} city={location.city}/>}
+
+      {indices && <Indices indices={indices}/>}
+
     </div>
   );
   

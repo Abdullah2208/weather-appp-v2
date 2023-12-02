@@ -12,7 +12,6 @@ import NoIcon from './Icons/NoIcon.png'
 
 function AQI (props) {
     let {aqi, city} = props;
-    aqi = 450
     city = city.toUpperCase();
 
     const [condition, setCondition] = useState(null);
