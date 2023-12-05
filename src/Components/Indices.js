@@ -35,7 +35,7 @@ function Indices(props) {
             </div>
             <div className='indices-div'>
                 <img src={Dust} alt='dust'/>
-                <p>Dust & Dander</p>
+                <p>Dust</p>
                 <IndiceComponent indice={dustAndDander}/>
             </div>
         </div>

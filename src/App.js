@@ -5,11 +5,12 @@ import Location from './Components/Headline';
 import MainBox from './Components/MainBox';
 import AQI from './Components/AQI';
 import Indices from './Components/Indices';
+import Footer from './Components/Footer';
 
 function App() {
 
   const token = '544cc40b9018a5';
-  const apiKey = 'v90KQ6JEhK6OuigQwKHpKGeKf63tv4m9';
+  const apiKey = 'SiPVszgovu6aFy5pYecgwyi8szDKfZM3';
 
   const [location, setlocation] = useState(null);
   const [weather, setWeather] = useState(null);
@@ -117,6 +118,8 @@ function App() {
       {aqi && <AQI aqi={aqi.aqi} city={location.city}/>}
 
       {indices && <Indices indices={indices}/>}
+
+
 
     </div>
   );

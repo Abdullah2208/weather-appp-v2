@@ -52,7 +52,7 @@ function MainBox (props) {
     const notFullyCloudyIcon = ['partly sunny', 'intermittent clouds', 'partly cloudy', 'partly clear', 'some clouds']
     const cloudyIcon = ['mostly cloudy', 'cloudy', 'many clouds']
     const hazyFogMistIcon = ['haze', 'hazy sunshine', 'hazy moonlight', 'fog', 'mist']
-    const rainIcon = ['rain', 'heavy rain', 'light rain', 'moderate rain', 'showers', 'light showers', 'drizzle', 'sprinkles', 'scattered showers', 'moderate rainfall', 'rain showers', 'heavy rainfall', '']
+    const rainIcon = ['rain', 'mostly cloudy w/ showers','heavy rain', 'light rain', 'moderate rain', 'showers', 'light showers', 'drizzle', 'sprinkles', 'scattered showers', 'moderate rainfall', 'rain showers', 'heavy rainfall', '']
     const snowIcon = ['snow', 'snow storm', 'light snow', 'flurries', 'scattered snow showers', 'light dusting', 'moderate rain','moderate snowfall', 'steady snow', 'continuous snow', 'accumulating snow', 'heavy snowfall', 'snowfall', 'intense snow', 'snow squalls', 'blizzard', 'snowstorm', 'winter storm', 'snow showers', 'severe snowfall', 'whiteout', 'powder snow', 'wet snow']
     const stormIcon = ['thunderstorms', 'thunder and rain', 'rain and thunder', 'storm', 'story weather', 'showers with thunder']
     const windIcon = ['wind', 'windy', 'windy weather']
@@ -126,11 +126,13 @@ impericalWind = impericalWind.toFixed(1)
             <div className="main-box">
                 <div className="icon"><img src={url} alt="Weather Icon" width={'150px'}/></div>
                 {isFarenheit ? <div className="temperature"><p>{temperatureInF}{degreeSymbol}F</p></div>:<div className="temperature"><p>{temperatureInC}{degreeSymbol}C</p></div>}
+
                 <div className="additional-info-box">
                     <div className="humidity"><img src={HumiditySensor} alt="A humidity sensor" width={'30px'}/><p>{humidity}%</p></div>
                     <div className="precipitation"><img src={Umbrella} alt="An umbrella" width={'30px'}/><p>{precipitation}%</p></div>
                     <div className="wind"><img src={WindSock} alt="A wind sock"  width={'30px'}/>{isFarenheit? <p>{impericalWind} knots</p>: <p>{wind}km/h</p>}</div>
                 </div>
+                
             </div>
             <Forecast forecast={forecast} isFarenheit={isFarenheit}/>
             <div className="degree-buttons"><div role="button" onClick={() => setIsFarenheit(false)}>{degreeSymbol}C </div><div>|</div><div role="button" onClick={() => setIsFarenheit(true)}> {degreeSymbol}F</div></div>

@@ -1,7 +1,6 @@
 
 body {
     background-color: #F5F5F5;
-    overflow-x: hidden;
 }
 img {
     pointer-events: none;
@@ -12,6 +11,9 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.hamburger-icon {
+    padding-top: 1em;
 }
 header nav ul{
     display: flex;
@@ -86,10 +88,13 @@ header nav ul li:hover {
     text-align: center;
     font-size: 1.2em;
     cursor: pointer;
+    user-select: none;
 }
-.degree-buttons div{
+.degree-buttons div {
     display: inline;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* For iOS Safari */
 }
+
 
 .aqi-box {
     margin: 3rem 6rem 0rem 6rem;
@@ -145,7 +150,7 @@ header nav ul li:hover {
 }
 .indices-div  {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1fr 2fr 2fr;
     grid-template-rows: auto;
     width: fit-content;
     min-width: 300px;
@@ -174,10 +179,43 @@ header nav ul li:hover {
     background-color: #a070b6;
     color: #543b63;
 }
+
+.forecast-div {
+    width: 80%;
+    margin: 4em auto 0 auto;
+
+}
+.forecast-component {
+    display: grid;
+    grid-template-rows: 2fr 1fr 1fr;
+    justify-items: center;
+}
+.forecast-component img {
+    width: 100px;
+}
+.forecast-component * {
+    margin: 0;
+    width: fit-content;
+    height: fit-content;
+}
+.footer-top-box {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    font-size: 0.8em;
+    width: fit-content;
+    gap: 5rem;
+    color: #707070;
+}
+.footer-top-box-content-div ul{
+    list-style: none;
+    padding: 0;
+}
+.footer-top-box-content-div ul li:hover {
+    color: black;
+}
 @media (max-width: 600px) {
-    body {
-        display: none;
-    }
+
     header nav ul{
         margin: 0;
         padding-top: 50%;
@@ -208,5 +246,91 @@ header nav ul li:hover {
         "icon" 
         "temperature"
         "additional";
+    }
+    .temperature p {
+        font-size: 5rem;
+    }
+    .icon img{
+        width: 170px;
+    }
+
+}
+
+@media (max-width: 850px) {
+    .aqi-box {
+        grid-template-columns: 1fr;
+        grid-template-rows: 2fr 1fr 2fr;
+        margin: 3rem 3rem 0 3rem;
+        justify-items: center;
+    } 
+    .aqi-condition {
+        height: fit-content;
+        margin-left: 0;
+        margin-top: 0;   
+    }
+    .aqi-condition p {
+        margin: 0;
+    }
+
+    .aqi-value {
+        margin-bottom: 0;
+        width:60%
+    }
+    .aqi-condition p:nth-child(1) {
+        display: none;
+    }
+    .aqi-icon {
+        margin-bottom: 2em;
+    }
+
+}
+@media (max-width: 850px) and (min-width: 500px) {
+    
+    .indices-main-box {
+        margin: 8rem 3rem 4rem 3rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-content: center;
+        align-items: center;
+   
+    }
+    .indices-div {
+        margin: 0;
+        width: fit-content;
+        justify-content: start;
+        grid-template-columns: 1fr 2fr 1fr;
+        min-width: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .indices-main-box {
+        margin: 8rem 3rem 4rem 3rem;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+
+    }
+    .indices-div {
+        grid-template-columns: 1fr 1fr;
+        min-width: 100px;
+        grid-template-areas: 'theicon des'
+                                'ind ind'
+    }
+    
+    .indices-div img {
+        grid-area: theicon;
+    }
+    
+    .indices-div :nth-child(2) {
+        grid-area: des
+    }
+    
+    .indices-div :nth-child(3) {
+        text-align: center;
+        grid-area: ind;
+        width: 80%;
+    }
+    .location {
+        font-size: 1.2rem;
     }
 }

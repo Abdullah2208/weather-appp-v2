@@ -48,20 +48,47 @@ function Forecast(props) {
         month: new Date(forecast[4].Date).getMonth()+ 1,
         weather: forecast[4].Day.IconPhrase
     }
-
     useEffect(() => {
         setIsToday(dayOne.day === myDay)
 
         //eslint-disable-next-line
     }, [dayOne.date, myDate])
 
+    const carouselResponsive = {
+        superLargeDesktop : {
+            breakpoint: { max: 4000, min: 3000},
+            items: 4
+        },
+        desktop: {
+            breakpoint: { max: 3000, min: 1000 },
+            items: 4
+        },
+        tablet: {
+            breakpoint: { max: 1000, min: 464 },
+            items: 2
+        },
+        mobile: {
+            breakpoint: { max: 464, min: 0 },
+            items: 1
+        }
+    }
+
 
     return (
-        <div>
+        <div className='forecast-div'>
+        <Carousel
+         responsive={carouselResponsive}
+         swipeable = {true}
+         draggable= {true}
+         keyBoardControl={false}
+         autoPlay={false}
+
+         >
             <ForecastComponent forecast={dayOne} isFarenheit={isFarenheit} isToday={isToday}/>
             <ForecastComponent forecast={dayTwo} isFarenheit={isFarenheit}/>
             <ForecastComponent forecast={dayThree} isFarenheit={isFarenheit}/>
             <ForecastComponent forecast={dayFour} isFarenheit={isFarenheit}/>
+        </Carousel>
         </div>
     )
 }

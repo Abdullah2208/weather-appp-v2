@@ -5,7 +5,7 @@ function IndiceComponent(props) {
     const { indice } = props;
     const [className, setClassName] = useState(null);
 
-    const greenColorArray = ['Good', 'Very Good', 'Excellent'];
+    const greenColorArray = ['Good', 'Very Good', 'Excellent', 'Low'];
     const yellowColorArray = ['Fair', 'Moderate', 'Average', 'Neutral']
     const redColorArray = ['Bad', 'High', 'Poor']
     const purpleColorArray = ['Extreme',  'Very High', 'Very Bad', 'Very Poor', 'Extremely Poor', 'Extremely High']

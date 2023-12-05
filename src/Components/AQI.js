@@ -85,7 +85,8 @@ function AQI (props) {
                 setColors(hazardousColors)
                 break;
             default:
-                setIcon(NoIcon)
+                setIcon(NoIcon);
+                break;
         }
     //eslint-disable-next-line
     }, [aqi, condition])

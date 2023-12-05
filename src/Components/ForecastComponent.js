@@ -17,16 +17,17 @@ import HazyClouds from './Icons/HazyClouds.png'
 
 function ForecastComponent (props) {
     let { forecast, isFarenheit, isToday } = props;
-    console.log(isToday)
     let decisionInputForWeather = forecast.weather;
     decisionInputForWeather = decisionInputForWeather.toLowerCase();
     const [icon, setIcon] = useState(null);
-    const [day, setDay] = useState(null)
+    const [day, setDay] = useState(null);
+
+    const degreeSymbol = '\u00B0';
 
     const notFullyCloudyIcon = ['partly sunny', 'intermittent clouds', 'partly cloudy', 'partly clear', 'some clouds']
-    const cloudyIcon = ['mostly cloudy', 'cloudy', 'many clouds']
+    const cloudyIcon = ['mostly cloudy', 'cloudy', 'many clouds', 'dreary']
     const hazyFogMistIcon = ['haze', 'hazy sunshine', 'hazy moonlight', 'fog', 'mist']
-    const rainIcon = ['rain', 'heavy rain', 'light rain', 'moderate rain', 'showers', 'light showers', 'drizzle', 'sprinkles', 'scattered showers', 'moderate rainfall', 'rain showers', 'heavy rainfall', '']
+    const rainIcon = ['rain', 'mostly cloudy w/ showers', 'heavy rain', 'light rain', 'moderate rain', 'showers', 'light showers', 'drizzle', 'sprinkles', 'scattered showers', 'moderate rainfall', 'rain showers', 'heavy rainfall', '']
     const snowIcon = ['snow', 'snow storm', 'light snow', 'flurries', 'scattered snow showers', 'light dusting', 'moderate rain','moderate snowfall', 'steady snow', 'continuous snow', 'accumulating snow', 'heavy snowfall', 'snowfall', 'intense snow', 'snow squalls', 'blizzard', 'snowstorm', 'winter storm', 'snow showers', 'severe snowfall', 'whiteout', 'powder snow', 'wet snow', 'rain and snow']
     const stormIcon = ['thunderstorms', 'thunder and rain', 'rain and thunder', 'storm', 'story weather', 'showers with thunder']
     const windIcon = ['wind', 'windy', 'windy weather']
@@ -93,10 +94,10 @@ function ForecastComponent (props) {
 
     return(
 
-        <div>
+        <div className='forecast-component'>
             <img src={icon} alt=''/>
-        {isFarenheit? <p>{forecast.highInF}/{forecast.lowInF}</p>:<p>{forecast.highInC}/{forecast.lowInC}</p>}
-        <p>{day}</p>
+            {isFarenheit? <p>{forecast.highInF}{degreeSymbol}/{forecast.lowInF}{degreeSymbol}</p>:<p>{forecast.highInC}{degreeSymbol}/{forecast.lowInC}{degreeSymbol}</p>}
+            <p>{day}</p>
         </div>
     )
 }
