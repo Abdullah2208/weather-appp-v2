@@ -119,7 +119,7 @@ function App() {
 
       {indices && <Indices indices={indices}/>}
 
-
+      {weather && aqi && indices && <Footer />}
 
     </div>
   );
