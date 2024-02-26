@@ -33,7 +33,7 @@ function ForecastComponent (props) {
     const windIcon = ['wind', 'windy', 'windy weather']
     const iceIcon = ['ice']
     const hailIcon = ['hail', 'hail storm', 'hailstorm']
-    const sleetIcon = ['sleet']
+    const sleetIcon = ['sleet', 'freezing rain']
     const sunnyIcon = ['sunny', 'mostly sunny']
     const hazyCloudsIcon = ['hazy clouds']
 

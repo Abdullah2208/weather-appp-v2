@@ -5,12 +5,12 @@ import Location from './Components/Headline';
 import MainBox from './Components/MainBox';
 import AQI from './Components/AQI';
 import Indices from './Components/Indices';
-import Footer from './Components/Footer';
+// import Footer from './Components/Footer';
 
 function App() {
 
   const token = '544cc40b9018a5';
-  const apiKey = 'SiPVszgovu6aFy5pYecgwyi8szDKfZM3';
+  const apiKey = 'v90KQ6JEhK6OuigQwKHpKGeKf63tv4m9';
 
   const [location, setlocation] = useState(null);
   const [weather, setWeather] = useState(null);
@@ -77,7 +77,7 @@ function App() {
     } 
     const fetchForecast = async (locationKey) => {
       try{
-        const responce = await fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${apiKey}`);
+        const responce = await fetch(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${apiKey}`);
         const json = await responce.json();
         const data = await json.DailyForecasts;
         setForecat(data)
@@ -97,7 +97,7 @@ function App() {
     }
     const fetchIndices = async (locationKey) => {
       try {
-        const responce = await fetch(`http://dataservice.accuweather.com/indices/v1/daily/1day/${locationKey}?apikey=${apiKey}`);
+        const responce = await fetch(`https://dataservice.accuweather.com/indices/v1/daily/1day/${locationKey}?apikey=${apiKey}`);
         const json = await responce.json();
         setIndices(json)
       }catch(error) {
@@ -119,7 +119,7 @@ function App() {
 
       {indices && <Indices indices={indices}/>}
 
-      {weather && aqi && indices && <Footer />}
+      {/* {weather && aqi && indices && <Footer />} */}
 
     </div>
   );
