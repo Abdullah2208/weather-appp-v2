@@ -10,7 +10,7 @@ import Indices from './Components/Indices';
 function App() {
 
   const token = '544cc40b9018a5';
-  const apiKey = 'v90KQ6JEhK6OuigQwKHpKGeKf63tv4m9';
+  const apiKey = 'SiPVszgovu6aFy5pYecgwyi8szDKfZM3';
 
   const [location, setlocation] = useState(null);
   const [weather, setWeather] = useState(null);
